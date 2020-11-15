@@ -1,4 +1,5 @@
 # social-media-api
+A RESTful API for a basic social media app.
 
 # Endpoints
 ```

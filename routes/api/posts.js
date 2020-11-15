@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/", auth, async (req, res) => {
   try {
-    const query = req.query.userId;
+    const query = req.query.user;
     const posts = await Post.find({ user: query }).populate("user", "username");
     return res.json(posts);
   } catch (error) {

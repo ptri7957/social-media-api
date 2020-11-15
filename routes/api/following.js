@@ -58,7 +58,7 @@ router.delete("/", auth, async (req, res) => {
   try {
     // Find followee based on query and follower (me)
     const follow = await Follow.findOne({
-      followee: req.query.userId,
+      followee: req.query.user,
       follower: req.user.id,
     });
 

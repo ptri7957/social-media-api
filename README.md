@@ -9,10 +9,10 @@ GET      /api/auth
 GET      /api/profile
 GET      /api/profile/img/:imageName
 POST     /api/profile
-GET      /api/following?followee={userID}
-POST     /api/following?user={userID}
-DELETE   /api/following?user={userID}
-GET      /api/posts?user={userID}
+GET      /api/following/:userID
+POST     /api/following/:userID
+DELETE   /api/following/:userID
+GET      /api/posts/user/:userID
 GET      /api/posts/following
 GET      /api/posts/:ID
 POST     /api/posts

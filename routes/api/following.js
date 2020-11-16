@@ -3,9 +3,9 @@ const auth = require("../../middleware/auth");
 const Follow = require("../../models/Follow");
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+router.get("/:userID", auth, async (req, res) => {
   try {
-    const followee = req.query.followee;
+    const followee = req.params.userID;
     const followers = await Follow.find({ followee })
       .populate("follower", "username")
       .select("follower");
@@ -15,9 +15,9 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/:userID", auth, async (req, res) => {
   try {
-    const followee = req.query.user;
+    const followee = req.params.userID;
     let follow = await Follow.findOne({
       followee: followee,
       follower: req.user.id,
@@ -54,11 +54,11 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.delete("/", auth, async (req, res) => {
+router.delete("/:userID", auth, async (req, res) => {
   try {
     // Find followee based on query and follower (me)
     const follow = await Follow.findOne({
-      followee: req.query.user,
+      followee: req.params.userID,
       follower: req.user.id,
     });
 
@@ -69,7 +69,7 @@ router.delete("/", auth, async (req, res) => {
     }
 
     await Follow.findOneAndRemove({
-      followee: req.query.userId,
+      followee: req.params.userId,
       follower: req.user.id,
     });
 

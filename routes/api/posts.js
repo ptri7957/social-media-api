@@ -7,10 +7,9 @@ const Comment = require("../../models/Comment");
 const Like = require("../../models/Like");
 const router = express.Router();
 
-router.get("/", auth, async (req, res) => {
+router.get("/user/:userID", auth, async (req, res) => {
   try {
-    const query = req.query.user;
-    const posts = await Post.find({ user: query }).populate("user", "username");
+    const posts = await Post.find({ user: req.params.userID }).populate("user", "username");
     return res.json(posts);
   } catch (error) {
     return res.status(500).json(error);
